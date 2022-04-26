@@ -14,7 +14,7 @@ function BstByJs() {
     if (this.root == null) {
       this.root = newNode
     } else {
-      this.insertRecursion(this.root, newNode)
+      this.insertNode(this.root, newNode)
     }
   }
   /**
@@ -22,20 +22,99 @@ function BstByJs() {
    * @param node：插入新节点的树
    * @param newNode：需要添加的新节点
    */
-  BstByJs.prototype.insertRecursion = function (node, newNode) {
+  BstByJs.prototype.insertNode = function (node, newNode) {
     if (newNode.val < node.val) {
         if (node.left == null) {
           node.left = newNode
         } else {
-          this.insertRecursion(node.left, newNode)
+          this.insertNode(node.left, newNode)
         }
     } else {
       if (node.right == null) {
         node.right = newNode
       } else {
-        this.insertRecursion(node.right, newNode)
+        this.insertNode(node.right, newNode)
       }
     }
+  }
+  // search(val)：在树中查找一个键，如果节点存在，则返回true；如果不存在，则返回false。
+  /**
+   * preOrderTraverse：通过先序遍历方式遍历所有节点。
+   * @param handler: 回调函数，将遍历的节点传给handler进行处理。
+   */
+  BstByJs.prototype.preOrderTraverse = function (handler) {
+    this.preOrderTraverseNode(this.root, handler)
+  }
+  /**
+   * 递归遍历节点
+   * @param node：树节点。
+   * @param handler： 回调函数，将遍历的节点传给handler进行处理。
+   */
+  BstByJs.prototype.preOrderTraverseNode = function (node,handler) {
+    if (node) {
+      handler(node)
+      this.preOrderTraverseNode(node.left, handler)
+      this.preOrderTraverseNode(node.right,handler)
+    }
+  }
+  /**
+   * inOrderTraverse：通过中序遍历方式遍历所有节点。
+   * @param handler： 回调函数，将遍历的节点传给handler进行处理。
+   */
+  BstByJs.prototype.inOrderTraverse = function (handler) {
+    this.inOrderTraverseNode(this.root,handler)
+  }
+  /**
+   * 递归遍历节点
+   * @param node：树节点。
+   * @param handler： 回调函数，将遍历的节点传给handler进行处理。
+   */
+  BstByJs.prototype.inOrderTraverseNode = function (node, handler) {
+    if (node) {
+      this.inOrderTraverseNode(node.left, handler)
+      handler(node)
+      this.inOrderTraverseNode(node.right, handler)
+    }
+  }
+  // postOrderTraverse：通过后序遍历方式遍历所有节点。
+  BstByJs.prototype.postOrderTraverse = function (handler) {
+    this.postOrderTraverseNode(this.root, handler)
+  }
+  BstByJs.prototype.postOrderTraverseNode = function (node, handler) {
+    if (node) {
+      this.postOrderTraverseNode(node.left, handler)
+      this.postOrderTraverseNode(node.right, handler)
+      handler(node)
+    }
+  }
+  /**
+   * min：返回树中最小的值/键。
+   * @returns {*|null}
+   */
+  BstByJs.prototype.min = function () {
+    let current = this.root
+    while (current.left) {
+      current = current.left
+    }
+    return current && current.val || current
+  }
+  /**
+   * max：返回树中最大的值/键。
+   * @returns {*|null}
+   */
+  BstByJs.prototype.max = function () {
+    let current = this.root
+    while (current.right) {
+      current = current.right
+    }
+    return current && current.val || current
+  }
+  /**
+   * remove(val)：从树中移除某个键，
+   * @param val: 节点值
+   */
+  BstByJs.prototype.remove = function (val) {
+
   }
 }
 
@@ -59,3 +138,17 @@ bst.insert(25)
 bst.insert(19)
 bst.insert(6)
 console.log(bst);
+bst.preOrderTraverse(function (node) {
+  console.log(node.val);
+})
+console.log('------------------------');
+bst.inOrderTraverse(function (node) {
+  console.log(node.val);
+})
+console.log('------------------------');
+bst.postOrderTraverse(function (node) {
+  console.log(node.val);
+})
+console.log('------------------------');
+console.log(bst.min());
+console.log(bst.max());
