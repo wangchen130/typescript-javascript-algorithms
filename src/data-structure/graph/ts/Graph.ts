@@ -1,4 +1,4 @@
-class GraphByTs {
+class Graph {
   public vertexes: []
   public edges: {[key: string]: []}
   constructor() {

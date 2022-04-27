@@ -1,4 +1,4 @@
-var GraphByTs = /** @class */ (function () {
+var Graph = /** @class */ (function () {
     function GraphByTs() {
     }
     return GraphByTs;

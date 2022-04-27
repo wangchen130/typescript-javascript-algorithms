@@ -1,4 +1,4 @@
-function BstByJs() {
+function Bst() {
   function Node(val) {
     this.val = val
     this.left = null
@@ -9,7 +9,7 @@ function BstByJs() {
    * 添加节点，外部调用
    * @param val：节点数据
    */
-  BstByJs.prototype.insert = function (val) {
+  Bst.prototype.insert = function (val) {
     var newNode = new Node(val)
     if (this.root == null) {
       this.root = newNode
@@ -22,7 +22,7 @@ function BstByJs() {
    * @param node：插入新节点的树
    * @param newNode：需要添加的新节点
    */
-  BstByJs.prototype.insertNode = function (node, newNode) {
+  Bst.prototype.insertNode = function (node, newNode) {
     if (newNode.val < node.val) {
         if (node.left == null) {
           node.left = newNode
@@ -42,7 +42,7 @@ function BstByJs() {
    * preOrderTraverse：通过先序遍历方式遍历所有节点。
    * @param handler: 回调函数，将遍历的节点传给handler进行处理。
    */
-  BstByJs.prototype.preOrderTraverse = function (handler) {
+  Bst.prototype.preOrderTraverse = function (handler) {
     this.preOrderTraverseNode(this.root, handler)
   }
   /**
@@ -50,7 +50,7 @@ function BstByJs() {
    * @param node：树节点。
    * @param handler： 回调函数，将遍历的节点传给handler进行处理。
    */
-  BstByJs.prototype.preOrderTraverseNode = function (node,handler) {
+  Bst.prototype.preOrderTraverseNode = function (node, handler) {
     if (node) {
       handler(node)
       this.preOrderTraverseNode(node.left, handler)
@@ -61,7 +61,7 @@ function BstByJs() {
    * inOrderTraverse：通过中序遍历方式遍历所有节点。
    * @param handler： 回调函数，将遍历的节点传给handler进行处理。
    */
-  BstByJs.prototype.inOrderTraverse = function (handler) {
+  Bst.prototype.inOrderTraverse = function (handler) {
     this.inOrderTraverseNode(this.root,handler)
   }
   /**
@@ -69,7 +69,7 @@ function BstByJs() {
    * @param node：树节点。
    * @param handler： 回调函数，将遍历的节点传给handler进行处理。
    */
-  BstByJs.prototype.inOrderTraverseNode = function (node, handler) {
+  Bst.prototype.inOrderTraverseNode = function (node, handler) {
     if (node) {
       this.inOrderTraverseNode(node.left, handler)
       handler(node)
@@ -77,10 +77,10 @@ function BstByJs() {
     }
   }
   // postOrderTraverse：通过后序遍历方式遍历所有节点。
-  BstByJs.prototype.postOrderTraverse = function (handler) {
+  Bst.prototype.postOrderTraverse = function (handler) {
     this.postOrderTraverseNode(this.root, handler)
   }
-  BstByJs.prototype.postOrderTraverseNode = function (node, handler) {
+  Bst.prototype.postOrderTraverseNode = function (node, handler) {
     if (node) {
       this.postOrderTraverseNode(node.left, handler)
       this.postOrderTraverseNode(node.right, handler)
@@ -91,7 +91,7 @@ function BstByJs() {
    * min：返回树中最小的值/键。
    * @returns {*|null}
    */
-  BstByJs.prototype.min = function () {
+  Bst.prototype.min = function () {
     let current = this.root
     while (current.left) {
       current = current.left
@@ -102,7 +102,7 @@ function BstByJs() {
    * max：返回树中最大的值/键。
    * @returns {*|null}
    */
-  BstByJs.prototype.max = function () {
+  Bst.prototype.max = function () {
     let current = this.root
     while (current.right) {
       current = current.right
@@ -113,7 +113,7 @@ function BstByJs() {
    * remove(val)：从树中移除某个键，
    * @param val: 节点值
    */
-  BstByJs.prototype.remove = function (val) {
+  Bst.prototype.remove = function (val) {
     // 删除节点的父节点
     let parent = null
     // 当前节点，即要删除的节点
@@ -173,7 +173,7 @@ function BstByJs() {
    * 获取后继节点，返回的后继节点为删除节点的右子树
    * @param node： 删除节点
    */
-  BstByJs.prototype.getSuccessor = function (node) {
+  Bst.prototype.getSuccessor = function (node) {
     let parent = node
     let current = node.right
     while (current.left) {
@@ -188,9 +188,9 @@ function BstByJs() {
   }
 }
 
-console.log('===================BstByJs============');
+console.log('===================Bst============');
 
-var bst = new BstByJs()
+var bst = new Bst()
 bst.insert(11)
 bst.insert(7)
 bst.insert(15)

@@ -1,19 +1,36 @@
+type NodeType = {
+  val: number;
+  left: NodeType;
+  right: NodeType;
+}
 class BstNode {
-  val
-  left
-  right
-  constructor(val) {
+  public val: NodeType["val"]
+  public left: NodeType
+  public right: NodeType
+  constructor(val: number) {
     this.val = val
     this.left = null
     this.right = null
   }
 }
-class BstByJsClass {
-  root
+
+class Bst {
+  public root: NodeType
   constructor() {
     this.root = null
   }
-  // insert(key)：向树中插入一个新的键。
+  // insert(val: number)：向树中插入一个新的键。
+  public insert(val: number) {
+    const newNode = new BstNode(val)
+    if (this.root === null) {
+      this.root = newNode
+    } else {
+      this.insertRecursion(this.root, newNode)
+    }
+  }
+  private insertRecursion (node: NodeType, newNode: NodeType) {
+
+  }
   // search(key)：在树中查找一个键，如果节点存在，则返回true；如果不存在，则返回false。
   // preOrderTraverse：通过先序遍历方式遍历所有节点。
   // inOrderTraverse：通过中序遍历方式遍历所有节点。

@@ -1,4 +1,4 @@
-function GraphByJs() {
+function Graph() {
   this.vertexes = []
   this.edges = {}
   // addVertex: 添加顶点
@@ -11,7 +11,7 @@ function GraphByJs() {
    * 添加单个顶点
    * @param v： 顶点值
    */
-  GraphByJs.prototype.addVertex = function (v) {
+  Graph.prototype.addVertex = function (v) {
     this.vertexes.push(v)
     this.edges[v] = []
   }
@@ -19,7 +19,7 @@ function GraphByJs() {
    * 批量添加顶点
    * @param vList： 顶点数组
    */
-  GraphByJs.prototype.addVertexes = function (vList) {
+  Graph.prototype.addVertexes = function (vList) {
     for (var i = 0; i < vList.length; i++) {
       var v = vList[i]
       this.vertexes.push(v)
@@ -31,7 +31,7 @@ function GraphByJs() {
    * @param v1：顶点1
    * @param v2： 顶点2
    */
-  GraphByJs.prototype.addEdge = function (v1, v2) {
+  Graph.prototype.addEdge = function (v1, v2) {
     this.edges[v1].push(v2)
     this.edges[v2].push(v1)
   }
@@ -39,7 +39,7 @@ function GraphByJs() {
    * initState: 初始化顶点的状态。 1.表示未被访问也未被探索。2.表示被访问但未被探索。3.表示被探索
    * @returns {{}}: 状态映射表
    */
-  GraphByJs.prototype.initState = function () {
+  Graph.prototype.initState = function () {
     var stateMap = {}
     for (var i = 0; i < this.vertexes.length; i++) {
       var v = this.vertexes[i]
@@ -52,7 +52,7 @@ function GraphByJs() {
    * @param initV： 第一个访问的顶点
    * @param handler： 处理遍历到的顶点的回调函数
    */
-  GraphByJs.prototype.bfs = function (initV, handler) {
+  Graph.prototype.bfs = function (initV, handler) {
     var state = this.initState()
     var queue = []
     queue.push(initV)
@@ -76,7 +76,7 @@ function GraphByJs() {
    * @param initV： 第一个访问的顶点
    * @param handler： 处理遍历到的顶点的回调函数
    */
-  GraphByJs.prototype.dfs = function (initV,handler) {
+  Graph.prototype.dfs = function (initV, handler) {
     var state = this.initState()
     this.dfsVertex(initV,state,handler)
   }
@@ -86,7 +86,7 @@ function GraphByJs() {
    * @param state： 状态映射表
    * @param handler：处理遍历到的顶点的回调函数
    */
-  GraphByJs.prototype.dfsVertex = function (v, state,handler) {
+  Graph.prototype.dfsVertex = function (v, state, handler) {
     state[v] = 2
     handler(v)
     var vList = this.edges[v]
@@ -101,7 +101,7 @@ function GraphByJs() {
   /**
    * 重写toString方法，以邻接表的形式打印出来
    */
-  GraphByJs.prototype.toString = function () {
+  Graph.prototype.toString = function () {
     var resultStr = ''
     for (var i = 0; i < this.vertexes.length; i++) {
       var v = this.vertexes[i]
@@ -117,7 +117,7 @@ function GraphByJs() {
   }
 }
 
-const graph = new GraphByJs()
+const graph = new Graph()
 var vertexList = ['A','B','C','D','E','F','G','H','I']
 graph.addVertexes(vertexList)
 graph.addEdge('A','B')

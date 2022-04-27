@@ -50,10 +50,10 @@ function ArrayList() {
     }
   }
   ArrayList.prototype.selectSort = function () {
-    
+
   }
   ArrayList.prototype.insertSort = function () {
-    
+
   }
   /**
    * 重写toString方法

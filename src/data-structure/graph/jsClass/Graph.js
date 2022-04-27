@@ -1,4 +1,4 @@
-class GraphByJsClass {
+class Graph {
   vertexes
   edges
   constructor() {
