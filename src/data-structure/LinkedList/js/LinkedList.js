@@ -39,18 +39,155 @@ function LinkedList() {
       this.head = newNode
     } else {
       var current = this.head
-      var prevNode = null
+      var prev = null
       var index = 0
       while (index < position) {
         index ++
-        prevNode = current
+        prev = current
         current = current.next
       }
       newNode.next = current
-      prevNode.next = newNode
+      prev.next = newNode
     }
     this.length ++
     return newNode
   }
-
+  LinkedList.prototype.getData = function (position) {
+    if (position < 0 || position >= this.length) return null
+    var current = this.head
+    var index = 0
+    while (index < position) {
+      index ++
+      current = current.next
+    }
+    return current.data
+  }
+  LinkedList.prototype.indexOf = function (data) {
+    var current = this.head
+    var index = 0
+    while (current) {
+      if (data == current.data) {
+        return index
+      }
+      index ++
+      current = current.next
+    }
+    return -1
+  }
+  LinkedList.prototype.update = function (position, data) {
+    if (position < 0 || position >= this.length) return false
+    var current = this.head
+    var index = 0
+    while (index < position) {
+      index ++
+      current = current.next
+    }
+    current.data = data
+    return current
+  }
+  LinkedList.prototype.removeAt = function (position) {
+    if (position < 0 || position >= this.length) return null
+    var current = this.head
+    var prev = null
+    var index = 0
+    if (position == 0) {
+      this.head = current.next
+    } else {
+      while (index < position) {
+        index ++
+        prev = current
+        current = current.next
+      }
+      prev.next = current.next
+    }
+    this.length --
+    return current
+  }
+  LinkedList.prototype.remove = function (data) {
+    var current = this.head
+    var prev = null
+    if (data == this.head.data) {
+      this.head = current.next
+      this.length --
+      return current
+    } else {
+      while (current) {
+        if (data == current.data) {
+          prev.next = current.next
+          this.length --
+          return  current
+        }
+        prev = current
+        current = current.next
+      }
+      return false
+    }
+  }
+  LinkedList.prototype.isEmpty = function () {
+    return this.length == 0
+  }
+  LinkedList.prototype.size = function () {
+    return this.length
+  }
+  LinkedList.prototype.toString = function () {
+    var resultStr = ''
+    var current = this.head
+    while (current) {
+      if (!current.next) {
+        resultStr += current.data
+      } else {
+        resultStr += current.data + '->'
+      }
+      current = current.next
+    }
+    return resultStr
+  }
 }
+
+// ---------------- 封装的单向链表结构测试 ---------------- //
+console.log('// ----- 单向链表结构测试 START -----//');
+const linkedList = new LinkedList();
+
+// 测试 append 方法
+linkedList.append('AA');
+linkedList.append('BB');
+linkedList.append('CC');
+console.log(linkedList);
+
+// 测试 toString 方法
+console.log(linkedList.toString()); //--> AA->BB->CC
+
+// 测试 insert 方法
+linkedList.insert(0, '123');
+linkedList.insert(2, '456');
+console.log(linkedList.toString()); //--> 123->AA->456->BB->CC
+
+// 测试 getData 方法
+console.log(linkedList.getData(0)); //--> 123
+console.log(linkedList.getData(1)); //--> AA
+
+// 测试 indexOf 方法
+console.log(linkedList.indexOf('AA')); //--> 1
+console.log(linkedList.indexOf('ABC')); //--> -1
+
+// 测试 update 方法
+linkedList.update(0, '12345');
+console.log(linkedList.toString()); //--> 12345->AA->456->BB->CC
+linkedList.update(1, '54321');
+console.log(linkedList.toString()); //--> 12345->54321->456->BB->CC
+
+// 测试 removeAt 方法
+linkedList.removeAt(3);
+console.log(linkedList.toString()); //--> 12345->54321->456->CC
+
+// 测试 remove 方法
+linkedList.remove('CC');
+console.log(linkedList.toString()); //--> 12345->54321->456
+
+// 测试 isEmpty 方法
+console.log(linkedList.isEmpty()); //--> false
+
+// 测试 size 方法
+console.log(linkedList.size()); //--> 3
+
+console.log('// ----- 单向链表结构测试 END -----//');
