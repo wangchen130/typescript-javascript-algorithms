@@ -50,7 +50,16 @@ function ArrayList() {
     }
   }
   ArrayList.prototype.selectSort = function () {
-
+    var len = this.array.length
+    for (var i = 0; i < len; i++) {
+      var min = i
+      for (var j = min + 1; j < len; j++) {
+        if (this.array[j] < this.array[min]) {
+          min = j
+        }
+      }
+      this.swap(min,i)
+    }
   }
   ArrayList.prototype.insertSort = function () {
 
@@ -66,5 +75,9 @@ function ArrayList() {
 var arrayList = new ArrayList()
 arrayList.insertList([100,1,50,40,90,80,20,10,30,70,60])
 console.log(arrayList.toString());
-arrayList.bubbleSort()
+// console.log('========bubbleSort======');
+// arrayList.bubbleSort()
+// console.log(arrayList.toString());
+console.log('========selectSort======');
+arrayList.selectSort()
 console.log(arrayList.toString());
