@@ -49,6 +49,9 @@ function ArrayList() {
       }
     }
   }
+  /**
+   * 选择排序
+   */
   ArrayList.prototype.selectSort = function () {
     var len = this.array.length
     for (var i = 0; i < len; i++) {
@@ -62,7 +65,16 @@ function ArrayList() {
     }
   }
   ArrayList.prototype.insertSort = function () {
-
+    var len = this.array.length
+    for (var i = 1; i < len; i++) {
+      var temp = this.array[i]
+      var j = i
+      while (temp < this.array[j - 1] && j > 0) {
+        this.array[j] = this.array[j - 1]
+        j--
+      }
+      this.array[j] = temp
+    }
   }
   /**
    * 重写toString方法
@@ -78,6 +90,8 @@ console.log(arrayList.toString());
 // console.log('========bubbleSort======');
 // arrayList.bubbleSort()
 // console.log(arrayList.toString());
-console.log('========selectSort======');
-arrayList.selectSort()
+// console.log('========selectSort======');
+// arrayList.selectSort()
+console.log('========insertSort======');
+arrayList.insertSort()
 console.log(arrayList.toString());
