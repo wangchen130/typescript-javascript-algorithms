@@ -8,7 +8,7 @@ class BstNode {
     this.right = null
   }
 }
-class Bst {
+export default class Bst {
   root
   constructor() {
     this.root = null
